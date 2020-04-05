@@ -3,11 +3,13 @@ $(document).ready(function(){
     //grab
     $(".dragger").mousedown(function(){
         $(".dragger:hover").css( "cursor","grabbing"),cancelable = false;
+        $(this).css("opacity", "0.5");
         
     });
     //release
     $(".dragger").mouseup(function(){
         $(".dragger:hover").css( "cursor","grab");
+        $(this).css("opacity", "1");
         
     });
 

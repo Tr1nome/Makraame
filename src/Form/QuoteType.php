@@ -2,25 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Image;
+use App\Entity\Quote;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class ImageType extends AbstractType
+class QuoteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file',FileType::class,array('label' => 'image','required' => false))
+            ->add('citation')
+            ->add('author')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Image::class,
+            'data_class' => Quote::class,
         ]);
     }
 }

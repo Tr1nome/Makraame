@@ -89,11 +89,32 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $image = $article->getImage();
+            $file = $form->get('image')->get('file')->getData();
+            if ($file){
+                $fileName = $this->generateUniqueFileName().'.'. $file->guessExtension();
+                // Move the file to the directory where brochures are stored
+                try {
+                    $file->move(
+                        $this->getParameter('images_directory'), $fileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $this->removeFile($image->getPath());
+                $image->setPath($this->getParameter('images_directory').'/'.$fileName) ;
+                $image->setImgpath($this->getParameter('images_path').'/'.$fileName);
+                $entityManager->persist($image);
+            }
+            if (empty($image->getId()) && !$file ){
+                $article->setImage(null);
+            }
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('article_index');
+            return $this->redirectToRoute('article_index', [
+                'id' => $article->getId(),
+            ]);
         }
-
         return $this->render('article/edit.html.twig', [
             'article' => $article,
             'form' => $form->createView(),

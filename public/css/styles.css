@@ -1,0 +1,49 @@
+body, html {
+  height:90%;
+  background-image: url(../img/liege.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  }
+
+  
+    .center-screen {
+        position:absolute;
+        left:40%;
+        }
+
+   .carte {
+    padding: 2%;
+background-color: #ffffa5;
+box-shadow: 2px 4px 6px #444;
+-moz-box-shadow: 2px 4px 6px #444;
+-webkit-box-shadow: 2px 4px 6px #444;
+transform: rotate(2deg);
+-moz-transform: rotate(2deg);
+-webkit-transform: rotate(2deg);
+-o-transform: rotate(2deg);
+-ms-transform: rotate(2deg);
+border-bottom-right-radius: 60px 10px;
+   }     
+
+ /* Slideshow container */
+.slideshow-container {
+  position: relative;
+  background: #f1f1f1f1;
+}
+
+/* Slides */
+.mySlides {
+  /*display: none;*/
+  padding: 80px;
+  text-align: center;
+  background: #f1f1f1f1;
+}
+
+
+
+/* Add an italic font style to all quotes */
+q {font-style: italic;}
+
+/* Add a blue color to the author */
+.author {color: cornflowerblue;} 

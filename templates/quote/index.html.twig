@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quote index{% endblock %}
+
+{% block body %}
+<!-- Slideshow container -->
+<div class="slideshow-container">
+{% for quote in quotes %}
+  <!-- Full-width slides/quotes -->
+  <div class="mySlides">
+    <q>{{ quote.citation }}</q>
+    <p class="author">- {{ quote.author }}</p>
+  </div>
+</div>
+
+<!--    <h1>Quote index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Citation</th>
+                <th>Author</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>-->
+
+    <a href="{{ path('quote_new') }}">Create new</a>
+{% endblock %}

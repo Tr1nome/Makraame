@@ -1,16 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Article index{% endblock %}
-
+{% block stylesheets %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ asset("css/styles.css") }}">
+<link rel="stylesheet" href="{{ asset("css/jquery-ui.css") }}">
+<link rel="stylesheet" href="{{ asset("css/jquery-ui.structure.css") }}">
+<link rel="stylesheet" href="{{ asset("css/jquery-ui.theme.css") }}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
 {% block body %}
-
-    <main role="main">
+<div class="centerDiv">
+<h2>Créer un post-it</h2>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Titre</label>
+    <input type="text" class="form-control" name="title" id="title" placeholder="Titre du post-it">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Contenu</label>
+    <textarea class="form-control" id="content" name="content" id="exampleFormControlTextarea1" rows="5" placeholder="Contenu du post-it"></textarea>
+  </div>
+  <button type="submit" id="create" class="btn btn-primary mb-2 float-right">Créer le post-it</button>
+</div>
+    <div class="main-page" style = "height:100%;">
+    <div class="d-flex justify-content-center">
+    <p>Date: <input type="text" id="datepicker"></p>
+    </div>
+      
     <div class="album py-5">
       <div class="container">
         <div class="row">
         {% for article in articles %}
-          <div id="draggable" class="col-md-4 dragger">
-            <div class="carte mb-4">
+          <div class="col-md-4">
+            <div id="draggable" class="carte mb-4 dragger">
             <div class="center-screen">
               <img style="width:50px;height:50px;" src="{{ asset('img/14690.png')}}"/>
             </div>
@@ -47,8 +71,54 @@
   </tr>
   {% endfor %}
         </div>
-
-  </main>
+</div>
+  </div>
 
     <a href="{{ path('article_new') }}">Create new</a>
+    
 {% endblock %}
+{% block javascripts %}
+        <script src="{{ asset("js/jquery.js") }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="{{ asset("js/jquery-ui-1.8.20.custom.min.js") }}"></script>
+        <script src="{{ asset("js/jquery-ui.js") }}"></script>
+        <script src="{{ asset("js/draggable.js") }}"></script>
+        <script src="{{ asset("js/quote.js") }}"></script>
+        <script src="{{ asset("js/turn.js") }}"></script>
+        <script src="{{ asset("js/zoom.js") }}"></script>
+        <script src="{{ asset("js/hash.js") }}"></script>
+        <script src="{{ asset("js/jgestures.min.js") }}"></script>
+        <script src="{{ asset("js/scissor.min.js") }}"></script>
+        <script src="{{ asset("js/modernizr.2.5.3.min.js") }}"></script>
+        <script src="{{ asset("js/dynamic-article.js") }}"></script>
+        <script>
+        $(document).ready(function(){
+
+$( "#datepicker" ).datepicker();
+function getMessage() {
+  const request = new XMLHttpRequest();
+  request.open("GET", {{ path('article_index')}})
+}
+    $("#create").click(function(e){
+      e.preventDefault();
+        var titleP = $('#title').val();
+        var contentP = $('#content').val();
+
+        $.ajax({
+            url: '{{ path('postit') }}',
+            method: "POST",
+            data: {
+                title:titleP,
+                content:contentP
+            },
+            success:function(data){
+                console.log(data);
+                window.location.reload();
+            }
+        })
+    });
+
+})
+</script>
+        {% endblock %}

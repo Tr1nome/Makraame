@@ -6,11 +6,13 @@ use App\Entity\Article;
 use App\Entity\Image;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/article")
@@ -68,6 +70,22 @@ class ArticleController extends AbstractController
             'article' => $article,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/newP", name="postit", methods={"GET","POST"})
+     */
+    public function create(Request $request):Response
+    {
+       $title = $request->get('title');
+       $content = $request->get('content');
+       $article = new Article();
+       $article->setTitle($title);
+       $article->setContent($content);
+       $entityManager = $this->getDoctrine()->getManager();
+       $entityManager->persist($article);
+       $entityManager->flush();
+       return $this->redirectToRoute('article_index');
     }
 
     /**

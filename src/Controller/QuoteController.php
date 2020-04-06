@@ -49,6 +49,36 @@ class QuoteController extends AbstractController
     }
 
     /**
+* @Route("/ajax", name="ajax_action")
+*/
+public function ajaxAction(Request $request)
+{
+	/* on récupère la valeur envoyée */
+    $idSelect = $request->get('idSelect');
+
+	switch ($idSelect) {
+		case 0:
+			$info = 'Page 1';
+			break;
+		case 1:
+			$info = 'Page 2';
+			break;
+		case 2:
+			$info = 'Page 3';
+			break;
+		default:
+			$info = 'La page nexiste pas';
+	}
+
+	/* On renvoie une réponse encodée en JSON */
+	$response = new Response(json_encode(array(
+        'info' => $info
+    )));
+    $response->headers->set('Content-Type', 'application/json');
+
+    return $response;
+}
+    /**
      * @Route("/{id}", name="quote_show", methods={"GET"})
      */
     public function show(Quote $quote): Response

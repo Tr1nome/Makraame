@@ -23,7 +23,7 @@ $(document).ready(function(){
     })
 
     d.draggable({
-        containment: "body",
+        containment: ".main-page",
         scroll: false,
         stop: function (event, ui) {
             positions[this.id] = ui.position

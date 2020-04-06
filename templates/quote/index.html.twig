@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Quote index{% endblock %}
-
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset("css/styles.css") }}">
+{% endblock %}
 {% block body %}
 <!-- Slideshow container -->
 <div class="slideshow-container">
@@ -11,6 +13,27 @@
     <q>{{ quote.citation }}</q>
     <p class="author">- {{ quote.author }}</p>
   </div>
+</div>
+
+<div class="form-group">
+	<select class="custom-select" id="selectType">
+		<option value="0">1</option>
+		<option value="1">2</option>
+		<option value="2">3</option>
+	</select>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body" id="modal-ajax">
+			<p id="textAjax"></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+			</div>
+		</div>
+	</div>
 </div>
 
 <!--    <h1>Quote index</h1>
@@ -44,3 +67,39 @@
 
     <a href="{{ path('quote_new') }}">Create new</a>
 {% endblock %}
+{% block javascripts %}
+        <script src="{{ asset("js/jquery.js") }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="{{ asset("js/jquery-ui-1.8.20.custom.min.js") }}"></script>
+        <script src="{{ asset("js/jquery-ui.js") }}"></script>
+        <script src="{{ asset("js/draggable.js") }}"></script>
+        <script src="{{ asset("js/quote.js") }}"></script>
+        <script src="{{ asset("js/turn.js") }}"></script>
+        <script src="{{ asset("js/zoom.js") }}"></script>
+        <script src="{{ asset("js/hash.js") }}"></script>
+        <script src="{{ asset("js/jgestures.min.js") }}"></script>
+        <script src="{{ asset("js/scissor.min.js") }}"></script>
+        <script src="{{ asset("js/modernizr.2.5.3.min.js") }}"></script>
+        <script src="{{ asset("js/dynamic-article.js") }}"></script>
+<script>
+    $('#selectType').on('change', function (e) {
+	var idSelect = $(this).val();
+	$.ajax({
+		url: '{{ path('ajax_action') }}',
+		type: "POST",
+		dataType: "json",
+			data: {
+				"idSelect": idSelect
+			},
+			async: true,
+			success: function (data) {
+				$('#textAjax').text(data.info);
+				$('#myModal').modal('show');
+			}
+	})
+});
+
+</script>
+    {% endblock %}
+

@@ -3,6 +3,17 @@ body,html{
   overflow-y: visible;
 }
 
+.centered {
+  top: 160px;
+    left: 160px;
+    width: 800px;
+    min-height: 500px;
+    height: auto;
+    background-color: #2185C5;
+    position: relative;
+
+}
+
 .main-page {
   height:100%;
   background-image: url(../img/bgd.jpg);
@@ -10,14 +21,46 @@ body,html{
   background-size: cover;
   background-position-x: center;
   }
-
+  div.gallery {
+    margin: 5px;
+    margin-left:100px;
+    float: left;
+    width: 180px;
+  }
+  
+  .full-width{
+    width:100%;
+    height:35%;
+    margin-top:auto;
+    background-color:black;
+  }
+  
+  div.gallery img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  div.desc {
+    padding: 15px;
+    text-align: center;
+  }
   .centerDiv
     {
       display:none;
       width: 20%;
     height: 50%;
     margin: 0 auto;
-    background-color: #ffffa5;;
+    padding: 2%;
+/*background-color: #ffffa5;*/
+box-shadow: 2px 4px 6px #444;
+-moz-box-shadow: 2px 4px 6px #444;
+-webkit-box-shadow: 2px 4px 6px #444;
+transform: rotate(2deg);
+-moz-transform: rotate(2deg);
+-webkit-transform: rotate(2deg);
+-o-transform: rotate(2deg);
+-ms-transform: rotate(2deg);
+border-bottom-right-radius: 60px 10px;
     position: absolute;
     left: 100px;
     border: 1px solid black;
@@ -62,6 +105,7 @@ max-width: 300px;
   padding: 80px;
   text-align: center;
   background: #f1f1f1f1;
+  border:1px solid black;
 }
 
 

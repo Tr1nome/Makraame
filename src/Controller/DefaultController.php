@@ -5,12 +5,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 /**
- * @Route("/", name="accueilClass_", host="leo-souly-modula.fr")
+ * @Route("/", name="accueil", host="leo-souly-modula.fr")
  */
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/", name="index_1")
      */
     public function index()
     {

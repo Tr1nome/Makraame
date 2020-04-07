@@ -46,6 +46,21 @@ class Article
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $color;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $positionx;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $positiony;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,5 +136,41 @@ class Article
     public function onPreUpdate()
     {
         $this->updatedAt = new \DateTime("now");
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function getPositionx(): ?string
+    {
+        return $this->positionx;
+    }
+
+    public function setPositionx(?string $positionx): self
+    {
+        $this->positionx = $positionx;
+
+        return $this;
+    }
+
+    public function getPositiony(): ?string
+    {
+        return $this->positiony;
+    }
+
+    public function setPositiony(string $positiony): self
+    {
+        $this->positiony = $positiony;
+
+        return $this;
     }
 }

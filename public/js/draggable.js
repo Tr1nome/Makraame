@@ -2,14 +2,18 @@ $(document).ready(function(){
 
     //grab
     $(".dragger").mousedown(function(){
+        $('audio#grabSound')[0].play();
         $(".dragger:hover").css( "cursor","grabbing"),cancelable = false;
         $(this).css("opacity", "0.5");
+        
         
     });
     //release
     $(".dragger").mouseup(function(){
+        $('audio#releaseSound')[0].play();
         $(".dragger:hover").css( "cursor","grab");
         $(this).css("opacity", "1");
+        
         
     });
 
@@ -28,6 +32,7 @@ $(document).ready(function(){
         stop: function (event, ui) {
             positions[this.id] = ui.position
             localStorage.positions = JSON.stringify(positions)
+            
         }
     });
 });

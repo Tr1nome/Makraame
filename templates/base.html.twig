@@ -1,62 +1,115 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset("css/styles.css") }}">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        {% endblock %}
-    </head>
-    <body>
-    <div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px;">
-  <a href="#" title="Menu" class="w3-bar-item w3-button"><i class="fa fa-home"></i></a> 
-  <a href="#" title="Créer un souvenir" class="w3-bar-item w3-button"><i class="fa fa-search"></i></a> 
-  <a href="#" id= "createPI" title="Créer un post-it" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a> 
-  <a href="#" title="Menu" class="w3-bar-item w3-button"><i class="fa fa-globe"></i></a>
-  <a href="#" title="Supprimer" class="w3-bar-item w3-button"><i class="fa fa-trash"></i></a> 
-</div>
-    <!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <a class="navbar-brand" href="{{ path("accueilClass_index") }}"><img src="{{ asset('img/Makramé.jpeg') }}" style="border-radius:50%;width:50px;height:50px;"/> Makraamé</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+	<head>
+		<meta charset="UTF-8">
+		<audio id="grabSound">
+			<source src="{{ asset("audio/grab.wav")}}" type="audio/mpeg">
+		</audio>
+		<audio id="releaseSound">
+			<source src="{{ asset("audio/release.wav")}}" type="audio/mpeg">
+		</audio>
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset("css/styles.css") }}">
+			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			<link rel="stylesheet" href="{{ asset("css/styles.css") }}">
+			<link rel="stylesheet" href="{{ asset("css/jquery-ui.css") }}">
+			<link rel="stylesheet" href="{{ asset("css/jquery-ui.structure.css") }}">
+			<link rel="stylesheet" href="{{ asset("css/jquery-ui.theme.css") }}">
+			<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2@2.0.0/dist/spectrum.min.css">
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		{% endblock %}
+	</head>
+	<body>
+		<div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px;">
+			<a href="{{ path('accueilindex_1')}}" title="Menu" class="w3-bar-item w3-button">
+				<i class="fa fa-home"></i>
+			</a>
+			<a href="{{ path('quote_index')}}" title="Créer un souvenir" class="w3-bar-item w3-button">
+				<i class="fa fa-search"></i>
+			</a>
+			<a href="#" id="createPI" title="Créer un post-it" class="w3-bar-item w3-button">
+				<i class="fa fa-envelope"></i>
+			</a>
+			<a href="{{ path('article_index')}}" title="Menu" class="w3-bar-item w3-button">
+				<i class="fa fa-globe"></i>
+			</a>
+			<a href="#" title="Supprimer" class="w3-bar-item w3-button">
+				<i class="fa fa-trash"></i>
+			</a>
+		</div>
+		<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+				        <a class="navbar-brand" href=""><img src="{{ asset('img/Makramé.jpeg') }}" style="border-radius:50%;width:50px;height:50px;"/> Makraamé</a>
+				        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				            <span class="navbar-toggler-icon"></span>
+				        </button>
+				
+				        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				           <ul class="navbar-nav mr-auto">
+				                <li class="nav-item">
+				                    <a class="nav-link" href="{{ path("article_index") }}">Articles</a>
+				                </li>
+				                <li class="nav-item">
+				                    <a class="nav-link" href="{{ path("quote_index") }}">Citations</a>
+				                </li>
+				            </ul>
+				
+				        </div>
+				    </nav>-->
+		{% block body %}
+			<div style="margin-top:50px;"></div>
+		{% endblock %}
+		{% block javascripts %}
+			<script src="{{ asset("js/jquery.js") }}"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+			<script src="{{ asset("js/jquery-ui-1.8.20.custom.min.js") }}"></script>
+			<script src="{{ asset("js/jquery-ui.js") }}"></script>
+			<script src="{{ asset("js/draggable.js") }}"></script>
+			<script src="{{ asset("js/quote.js") }}"></script>
+			<script src="{{ asset("js/turn.js") }}"></script>
+			<script src="{{ asset("js/zoom.js") }}"></script>
+			<script src="{{ asset("js/hash.js") }}"></script>
+			<script src="{{ asset("js/jgestures.min.js") }}"></script>
+			<script src="{{ asset("js/scissor.min.js") }}"></script>
+			<script src="{{ asset("js/modernizr.2.5.3.min.js") }}"></script>
+			<script src="{{ asset("js/dynamic-article.js") }}"></script>
+			<script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2@2.0.0/dist/spectrum.min.js"></script>
+			<script>
+				$(document).ready(function () {
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-           <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path("article_index") }}">Articles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path("quote_index") }}">Citations</a>
-                </li>
-            </ul>
 
-        </div>
-    </nav>-->
-        {% block body %}
-        <div style="margin-top:50px;"></div>
-        {% endblock %}
-        {% block javascripts %}
-        <script src="{{ asset("js/jquery.js") }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="{{ asset("js/jquery-ui-1.8.20.custom.min.js") }}"></script>
-        <script src="{{ asset("js/jquery-ui.js") }}"></script>
-        <script src="{{ asset("js/draggable.js") }}"></script>
-        <script src="{{ asset("js/quote.js") }}"></script>
-        <script src="{{ asset("js/turn.js") }}"></script>
-        <script src="{{ asset("js/zoom.js") }}"></script>
-        <script src="{{ asset("js/hash.js") }}"></script>
-        <script src="{{ asset("js/jgestures.min.js") }}"></script>
-        <script src="{{ asset("js/scissor.min.js") }}"></script>
-        <script src="{{ asset("js/modernizr.2.5.3.min.js") }}"></script>
-        <script src="{{ asset("js/dynamic-article.js") }}"></script>
-        
-        
-        {% endblock %}
-    </body>
+$("#create").click(function (e) {
+e.preventDefault();
+console.log("clic");
+var titleP = $('#title').val();
+var contentP = $('#content').val();
+var color = $("#color-picker").val();
+
+
+$.ajax({
+url: '{{ path('postit') }}',
+method: "POST",
+data: {
+title: titleP,
+content: contentP,
+color: color
+},
+success: function (data) {
+console.log(data);
+window.location.reload();
+}
+})
+});
+
+})
+			</script>
+
+		{% endblock %}
+	</body>
 </html>

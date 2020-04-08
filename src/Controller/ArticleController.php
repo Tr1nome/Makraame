@@ -23,13 +23,14 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="article_index", methods={"GET"})
      */
-    public function index(ArticleRepository $articleRepository, ImageRepository $imageRepo): Response
+    public function index(ArticleRepository $articleRepository, ImageRepository $imageRepo, Request $request): Response
     {
         return $this->render('article/index.html.twig', [
             'articles' => $articleRepository->findAll(),
-            'images' => $imageRepo->findAll()
+            
         ]);
     }
+
 
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})
@@ -95,12 +96,14 @@ class ArticleController extends AbstractController
         $color = $request->get('color');
         $posX = $request->get('positionx');
         $posY = $request->get('positiony');
+        $creation = $request->get('creation');
         $article = new Article();
         $article->setTitle($title);
         $article->setContent($content);
         $article->setColor($color);
         $article->setPositionx($posX);
         $article->setPositiony($posY);
+        $article->setCreation($creation);
         
         $entityManager->persist($article);
         $entityManager->flush();

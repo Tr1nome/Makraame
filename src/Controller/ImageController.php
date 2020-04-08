@@ -40,11 +40,10 @@ class ImageController extends AbstractController
             // $file stores the uploaded PDF file
             $entityManager = $this->getDoctrine()->getManager();
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $files = $form->get('file')->getData();
+            $file = $form->get('file')->getData();
 
-            if($files) {
-                foreach($files as $file) 
-                {
+            if($file) {
+                
                     $fileName = $this->generateUniqueFileName() . '.' . $file->guessExtension();
 
                 // Move the file to the directory where brochures are stored
@@ -58,7 +57,7 @@ class ImageController extends AbstractController
                 }
                 $image->setPath($this->getParameter('images_directory') . '/' . $fileName);
                 $image->setImgPath($this->getParameter('images_path') . '/' . $fileName);
-                }
+                
                 
             }
             

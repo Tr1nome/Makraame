@@ -24,7 +24,10 @@
 			<label for="exampleFormControlTextarea1">Contenu</label>
 			<textarea class="form-control" id="content" name="content" id="exampleFormControlTextarea1" rows="5" placeholder="Contenu du post-it"></textarea>
 		</div>
+		<p>Date:
+			<input type="text" id="createDate"></p>
 		<input id="color-picker" name="color" value="#ffffff"/>
+
 		<button id="cancel" class="btn btn-danger mb-2">Annuler</button>
 		<button type="submit" id="create" class="btn btn-primary mb-2 float-right">Créer le post-it</button>
 	</div>
@@ -34,7 +37,7 @@
 				<input type="text" id="datepicker"></p>
 		</div>
 
-		<div class="album py-5">
+		<div class="album">
 			<div class="container">
 				<div class="row">
 					{% for article in articles %}
@@ -50,7 +53,7 @@
 								{% endif %}
 								<!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
 								<div class="card-body">
-									<p class="card-text">
+									<p class="card-text" style="font-family:cursive;font-size:1.5rem;">
 										{{ article.content | raw }}
 									</p>
 									<div class="d-flex justify-content-between align-items-center">
@@ -59,7 +62,7 @@
 
 											{{ include('article/_delete_form.html.twig') }}
 										</div>
-										<small class="text-muted dater">{{ article.createdAt | date("d/F/Y") }}</small>
+										<small class="text-muted dater">{{ article.creation }}</small>
 									</div>
 								</div>
 							</div>
@@ -79,13 +82,7 @@
 
 
 	</div>
-	<div class="full-width">
-		{% for image in images %}
-			<div class="gallery">
-				<img id="draggable" class="dragger" src="http://leo-souly-modula.fr/{{ image.imgPath }}" width="600" height="400">
-			</div>
-		{% endfor %}
-	</div>
+	
 
 {% endblock %}
 {% block javascripts %}
@@ -104,35 +101,52 @@
 	<script src="{{ asset("js/modernizr.2.5.3.min.js") }}"></script>
 	<script src="{{ asset("js/dynamic-article.js") }}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2@2.0.0/dist/spectrum.min.js"></script>
+	<script src="{{ asset("js/ui/datepicker-fr.js") }}"></script>
 	<script>
 		$(document).ready(function () {
-$("#datepicker").datepicker();
+	
+$("#datepicker").datepicker({
+	defaultDate: 0
+}
+	
+);
+$("#createDate").datepicker();
 
+$("#createDate").change(function () {
+console.log("date changed");
 
-$("dater").filter($("#datepicker").val()).css("display", "none");
+})
+$("#datepicker").change(function() {
+    var value = $(this).val().toLowerCase();
+    $(".dragger").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
 $("#create").click(function (e) {
-e.preventDefault();
-console.log("clic");
-var titleP = $('#title').val();
-var contentP = $('#content').val();
-var color = $("#color-picker").val();
+	var date = $("#createDate").val();
+	e.preventDefault();
+	console.log("clic");
+	var titleP = $('#title').val();
+	var contentP = $('#content').val();
+	var color = $("#color-picker").val();
 
 
 $.ajax({
-url: '{{ path('postit') }}',
-method: "POST",
-data: {
-title: titleP,
-content: contentP,
-color: color,
-positionx: "0",
-positiony: "0"
-},
-success: function (data) {
-console.log(data);
-window.location.reload();
-}
-})
+	url: '{{ path('postit') }}',
+	method: "POST",
+	data: {
+	title: titleP,
+	content: contentP,
+	color: color,
+	positionx: "0",
+	positiony: "0",
+	creation: date,
+	},
+	success: function (data) {
+	console.log(data);
+	window.location.reload();
+	}
+	})
 });
 
 })

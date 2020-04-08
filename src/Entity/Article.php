@@ -61,6 +61,11 @@ class Article
      */
     private $positiony;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $creation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -170,6 +175,22 @@ class Article
     public function setPositiony(string $positiony): self
     {
         $this->positiony = $positiony;
+
+        return $this;
+    }
+
+    public function __tostring() {
+        return $this->getCreatedAt();
+    }
+
+    public function getCreation(): ?string
+    {
+        return $this->creation;
+    }
+
+    public function setCreation(?string $creation): self
+    {
+        $this->creation = $creation;
 
         return $this;
     }

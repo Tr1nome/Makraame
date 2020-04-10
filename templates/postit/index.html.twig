@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10 d-flex justify-content-center">
+				{% for sticker in stickers %}
+					<img class="sticker" id="sticker" style="width:100px; height:auto;margin-left:5px;" src="{{ sticker.imgPath }}"/>
+				{% endfor %}
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row" id="field"></div>
+	</div>
+{% endblock %}
+

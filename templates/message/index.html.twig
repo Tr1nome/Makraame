@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Message index
+{% endblock %}
+
+{% block body %}
+
+	<div
+		style="height: 500px;padding-left: 100px;" class="messages"><!--<button id="loadMessages">Charger</button>-->
+	</div>
+	<div class="user-inputs" style="height:50px;padding-left: 100px;">
+		<div class="form-group">
+			<label for="exampleFormControlTextarea1">Example textarea</label>
+			<textarea class="form-control" id="inputM" rows="3"></textarea>
+			<button class="btn btn-primary" id="send">Envoyer</button>
+		</div>
+
+	</div>
+
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset("js/jquery.js") }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="{{ asset("js/jquery-ui-1.8.20.custom.min.js") }}"></script>
+	<script src="{{ asset("js/jquery-ui.js") }}"></script>
+	<script src="{{ asset("js/draggable.js") }}"></script>
+	<script src="{{ asset("js/quote.js") }}"></script>
+	<script src="{{ asset("js/turn.js") }}"></script>
+	<script src="{{ asset("js/zoom.js") }}"></script>
+	<script src="{{ asset("js/hash.js") }}"></script>
+	<script src="{{ asset("js/jgestures.min.js") }}"></script>
+	<script src="{{ asset("js/scissor.min.js") }}"></script>
+	<script src="{{ asset("js/modernizr.2.5.3.min.js") }}"></script>
+	<script src="{{ asset("js/dynamic-article.js") }}"></script>
+	<script src="{{ asset("js/ui/datepicker-fr.js") }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2@2.0.0/dist/spectrum.min.js"></script>
+	<script>
+
+		function getMessages(event) {
+$.ajax({
+url: '/message/ajax',
+type: 'GET',
+dataType: 'json',
+async: true,
+
+success: function (data, status) {
+  console.log(data);
+var e = $('<tr><th>Auteur</th><th>Contenu</th></tr>');
+$('.messages').html('');
+$('.messages').append(e);
+
+for (i = 0; i < data.length; i ++) {
+message = data[i];
+var e = $('<tr><td id = "author"></td><td id = "content"></td></tr>');
+
+$('#author', e).html(message['author']);
+$('#content', e).html(message['content']);
+$('.messages').append(e);
+}
+},
+error: function (xhr, textStatus, errorThrown) {
+alert('Ajax request failed.');
+}
+});
+}
+
+$(document).ready(function () {
+
+getMessages();
+var interval = window.setInterval(getMessages, 3000);
+
+$("#send").click(function () {
+  var content = $("#inputM").val();
+$.ajax({
+url: '/message/newAjax',
+type: 'POST',
+data: {
+  content:content
+},
+async: true,
+
+success: function (data, status) {
+getMessages();
+
+},
+error: function (xhr, textStatus, errorThrown) {
+alert('Ajax request failed.');
+}
+});
+})
+
+$("#create").click(function (e) {
+e.preventDefault();
+console.log("clic");
+var titleP = $('#title').val();
+var contentP = $('#content').val();
+var color = $("#color-picker").val();
+
+$.ajax({
+url: '{{ path('postit') }}',
+method: "POST",
+data: {
+title: titleP,
+content: contentP,
+color: color
+},
+success: function (data) {
+console.log(data);
+window.location.reload();
+}
+})
+});
+
+});
+	</script>
+
+{% endblock %}

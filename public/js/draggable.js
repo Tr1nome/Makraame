@@ -26,7 +26,7 @@ $(document).ready(function(){
 
     d.draggable({
         grid:[50,50],
-        containment:[300,0,1200,600],
+        containment:[350,10,1150,650],
         opacity: 0.35,
         addClasses: false,
         snap:true,
@@ -39,6 +39,27 @@ $(document).ready(function(){
             
         }
     });
+    var positionsS = JSON.parse(localStorage.positionsS || "{}");
+    $(function () {
+    var s = $("[id=sticker]").attr("id", function (i) {
+        return "sticker_" + i
+    })
+    $.each(positionsS, function (id, pos) {
+        $("#" + id).css(pos)
+    })
+
+    s.draggable({
+        addClasses: false,
+        containment: "body",
+        cursor: "grabbing",
+        scroll: false,
+        stop: function (event, ui) {
+            positionsS[this.id] = ui.position
+            localStorage.positionsS = JSON.stringify(positionsS)
+            
+        }
+    });
 });
     
+});
 });

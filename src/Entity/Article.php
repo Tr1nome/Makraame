@@ -66,6 +66,11 @@ class Article
      */
     private $creation;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $creator;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -191,6 +196,18 @@ class Article
     public function setCreation(?string $creation): self
     {
         $this->creation = $creation;
+
+        return $this;
+    }
+
+    public function getCreator(): ?string
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(string $creator): self
+    {
+        $this->creator = $creator;
 
         return $this;
     }

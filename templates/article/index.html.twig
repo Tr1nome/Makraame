@@ -24,6 +24,13 @@
 			<label for="exampleFormControlTextarea1">Contenu</label>
 			<textarea class="form-control" id="content" name="content" id="exampleFormControlTextarea1" rows="5" placeholder="Contenu du post-it"></textarea>
 		</div>
+		<div class="form-group">
+			<label for="exampleFormControlSelect1">Auteur</label>
+			<select class="form-control" id="author">
+				<option>Hauoli</option>
+				<option>Tama</option>
+			</select>
+		</div>
 		<p>Date:
 			<input type="text" id="createDate"></p>
 		<input id="color-picker" name="color" value="#ffffff"/>
@@ -31,14 +38,19 @@
 		<button id="cancel" class="btn btn-danger mb-2">Annuler</button>
 		<button type="submit" id="create" class="btn btn-primary mb-2 float-right">Créer le post-it</button>
 	</div>
+	
 	<div class="main-page">
 		<div class="d-flex justify-content-center">
+			<a style="border:1px solid black; position:absolute;left:150px;top:20px;border-radius:50%;width:100px;height:100px;background-color:black;" href="#" id="createPI" title="Créer un post-it" class="w3-bar-item w3-button">
+				<i style="font-size:80px;color:cornsilk;" class="fas fa-sticky-note"></i>
+			</a>
 			<p>Date:
-				<input type="text" id="datepicker"></p>
+				<input type="text" id="datepicker" style="z-index:3;"></p>
 		</div>
 
 		<div class="album">
 			<div class="container">
+
 				<div class="row">
 					{% for article in articles %}
 						<div class="col-md-4">
@@ -62,7 +74,8 @@
 
 											{{ include('article/_delete_form.html.twig') }}
 										</div>
-										<small class="text-muted dater">{{ article.creation }}</small>
+										<small>{{ article.creator }}</small>
+										<small class="dater">{{ article.creation }}</small>
 									</div>
 								</div>
 							</div>
@@ -75,14 +88,10 @@
 						</tr>
 					{% endfor %}
 				</div>
-
 			</div>
-
 		</div>
-
-
 	</div>
-	
+
 
 {% endblock %}
 {% block javascripts %}
@@ -104,49 +113,47 @@
 	<script src="{{ asset("js/ui/datepicker-fr.js") }}"></script>
 	<script>
 		$(document).ready(function () {
-	
-$("#datepicker").datepicker({
-	defaultDate: 0
-}
-	
-);
+
+$("#datepicker").datepicker({defaultDate: 0});
 $("#createDate").datepicker();
 
 $("#createDate").change(function () {
 console.log("date changed");
 
 })
-$("#datepicker").change(function() {
-    var value = $(this).val().toLowerCase();
-    $(".dragger").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
+$("#datepicker").change(function () {
+var value = $(this).val().toLowerCase();
+$(".dragger").filter(function () {
+$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+});
+});
 $("#create").click(function (e) {
-	var date = $("#createDate").val();
-	e.preventDefault();
-	console.log("clic");
-	var titleP = $('#title').val();
-	var contentP = $('#content').val();
-	var color = $("#color-picker").val();
+var date = $("#createDate").val();
+e.preventDefault();
+console.log("clic");
+var titleP = $('#title').val();
+var contentP = $('#content').val();
+var color = $("#color-picker").val();
+var author = $("#author").val();
 
 
 $.ajax({
-	url: '{{ path('postit') }}',
-	method: "POST",
-	data: {
-	title: titleP,
-	content: contentP,
-	color: color,
-	positionx: "0",
-	positiony: "0",
-	creation: date,
-	},
-	success: function (data) {
-	console.log(data);
-	window.location.reload();
-	}
-	})
+url: '{{ path('postit') }}',
+method: "POST",
+data: {
+title: titleP,
+content: contentP,
+color: color,
+positionx: "0",
+positiony: "0",
+creation: date,
+author: author
+},
+success: function (data) {
+console.log(data);
+window.location.reload();
+}
+})
 });
 
 })

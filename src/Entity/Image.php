@@ -37,6 +37,11 @@ class Image
      */
     private $file;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="images")
+     */
+    private $categories;
+
     public function getPath(): ?string
     {
         return $this->path;
@@ -69,6 +74,18 @@ class Image
     public function setImgPath(string $imgPath): self
     {
         $this->imgPath = $imgPath;
+
+        return $this;
+    }
+
+    public function getCategories(): ?Category
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(?Category $categories): self
+    {
+        $this->categories = $categories;
 
         return $this;
     }

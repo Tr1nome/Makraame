@@ -1,100 +1,177 @@
-body,html{
-  height:100%;
+body,
+html {
+  height: 100%;
   overflow-y: visible;
 }
 
 .centered {
   top: 160px;
-    left: 160px;
-    width: 800px;
-    min-height: 500px;
-    height: auto;
-    background-color: #2185C5;
-    position: relative;
-
+  left: 160px;
+  width: 800px;
+  min-height: 500px;
+  height: auto;
+  background-color: #2185c5;
+  position: relative;
 }
 
 .main-page {
-  height:100%;
+  height: 100%;
   background-image: url(../img/liege.jpg);
   background-repeat: no-repeat;
   background-size: contain;
   background-position-x: center;
-  }
-  div.gallery {
-    margin: 5px;
-    margin-left:100px;
-    float: left;
-    width: 180px;
-  }
-  
-  .full-width{
-    width:100%;
-    height:35%;
-    margin-top:auto;
-    background-color:black;
-  }
-  
-  div.gallery img {
-    width: 100px;
-    height: 100px;
-  }
-  
-  div.desc {
-    padding: 15px;
-    text-align: center;
-  }
-  .centerDiv
-    {
-      display:none;
-      width: 20%;
-    height: 50%;
-    margin: 0 auto;
-    padding: 2%;
-/*background-color: #ffffa5;*/
-box-shadow: 2px 4px 6px #444;
--moz-box-shadow: 2px 4px 6px #444;
--webkit-box-shadow: 2px 4px 6px #444;
-transform: rotate(2deg);
--moz-transform: rotate(2deg);
--webkit-transform: rotate(2deg);
--o-transform: rotate(2deg);
--ms-transform: rotate(2deg);
-border-bottom-right-radius: 60px 10px;
-    position: absolute;
-    left: 100px;
-    border: 1px solid black;
-    z-index: 3;
-    top: 30px;
-    }
-    
-  .dragger{
-    z-index:2;
-  }
-    .center-screen {
-        position:absolute;
-        left:40%;
-        top:-5%;
-        }
+}
+div.gallery {
+  margin: 0 auto;
+  float: left;
+  width: 70px;
+}
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
 
-   .carte {
-    padding: 2%;
-background-color: #ffffa5;
-box-shadow: 2px 4px 6px #444;
--moz-box-shadow: 2px 4px 6px #444;
--webkit-box-shadow: 2px 4px 6px #444;
-transform: rotate(2deg);
--moz-transform: rotate(2deg);
--webkit-transform: rotate(2deg);
--o-transform: rotate(2deg);
--ms-transform: rotate(2deg);
-border-bottom-right-radius: 60px 10px;
-border-top-left-radius: 5px 10px;
-max-width: 300px;
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8;
+  cursor: pointer;
+}
 
-   }     
+.column img:hover {
+  opacity: 1;
+}
 
- /* Slideshow container */
+.a {
+  text-decoration: none;
+  color:black;
+}
+
+.a:hover{
+  text-decoration: none;
+  color:black;
+}
+/* Clear floats after the columns */
+.raw {
+  
+  background: blue;
+  width: 18%;
+  overflow-x: auto;
+  height: 500px;
+}
+
+/* The expanding image container */
+.containerr {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+div.b {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 850px;
+  border: 1px solid blue;
+  background-color: black;
+}
+
+.full-width {
+  width: 100%;
+  height: 35%;
+  margin-top: auto;
+  background-color: black;
+}
+
+div.gallery img {
+  width: 100px;
+  height: 100px;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+.hit-the-floor {
+  color: black;
+  font-size: 12em;
+  font-weight: bold;
+  font-family: Helvetica;
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
+    0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+    0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+    0 20px 20px rgba(0, 0, 0, 0.15);
+}
+.centerDiv {
+  display: none;
+  width: 20%;
+  height: 60%;
+  margin: 0 auto;
+  padding: 2%;
+  /*background-color: #ffffa5;*/
+  box-shadow: 2px 4px 6px #444;
+  -moz-box-shadow: 2px 4px 6px #444;
+  -webkit-box-shadow: 2px 4px 6px #444;
+  transform: rotate(2deg);
+  -moz-transform: rotate(2deg);
+  -webkit-transform: rotate(2deg);
+  -o-transform: rotate(2deg);
+  -ms-transform: rotate(2deg);
+  border-bottom-right-radius: 60px 10px;
+  position: absolute;
+  left: 100px;
+  border: 1px solid black;
+  z-index: 3;
+  top: 30px;
+}
+
+.dragger {
+  z-index: 2;
+}
+.center-screen {
+  position: absolute;
+  left: 40%;
+  top: -5%;
+}
+
+.carte {
+  padding: 2%;
+  background-color: #ffffa5;
+  box-shadow: 2px 4px 6px #444;
+  -moz-box-shadow: 2px 4px 6px #444;
+  -webkit-box-shadow: 2px 4px 6px #444;
+  transform: rotate(2deg);
+  -moz-transform: rotate(2deg);
+  -webkit-transform: rotate(2deg);
+  -o-transform: rotate(2deg);
+  -ms-transform: rotate(2deg);
+  border-bottom-right-radius: 60px 10px;
+  border-top-left-radius: 5px 10px;
+  max-width: 300px;
+}
+
+/* Slideshow container */
 .slideshow-container {
   position: relative;
   background: #f1f1f1f1;
@@ -106,81 +183,91 @@ max-width: 300px;
   padding: 80px;
   text-align: center;
   background: #f1f1f1f1;
-  border:1px solid black;
+  border: 1px solid black;
 }
-
-
 
 /* Add an italic font style to all quotes */
-q {font-style: italic;}
+q {
+  font-style: italic;
+}
 
 /* Add a blue color to the author */
-.author {color: cornflowerblue;} 
+.author {
+  color: cornflowerblue;
+}
 
-#flipbook{
-  width:1024px;
+#flipbook {
+  width: 1024px;
   height: 600px;
-  position:absolute;
-  
-
+  position: absolute;
 }
 
-#flipbook .page{
-  width:1024px;
-  height:600px;
-  background-color:white;
-  line-height:300px;
-  font-size:20px;
-  text-align:center;
+#flipbook .page {
+  width: 1024px;
+  height: 600px;
+  background-color: white;
+  line-height: 300px;
+  font-size: 20px;
+  text-align: center;
 }
 
-#flipbook .page-wrapper{
-  -webkit-perspective:2000px;
-  -moz-perspective:2000px;
-  -ms-perspective:2000px;
-  -o-perspective:2000px;
-  perspective:2000px;
-  
+#flipbook .page-wrapper {
+  -webkit-perspective: 2000px;
+  -moz-perspective: 2000px;
+  -ms-perspective: 2000px;
+  -o-perspective: 2000px;
+  perspective: 2000px;
 }
 
-#flipbook .hard{
+#flipbook .hard {
   /*background:rgb(187, 187, 187) !important;*/
-  color:#333;
+  color: #333;
   background-image: url('/img/tableau.jpg');
   background-size: cover;
-  -webkit-box-shadow:inset 0 0 5px #666;
-  -moz-box-shadow:inset 0 0 5px #666;
-  -o-box-shadow:inset 0 0 5px #666;
-  -ms-box-shadow:inset 0 0 5px #666;
-  box-shadow:inset 0 0 5px #666;
-  font-weight:bold;
+  -webkit-box-shadow: inset 0 0 5px #666;
+  -moz-box-shadow: inset 0 0 5px #666;
+  -o-box-shadow: inset 0 0 5px #666;
+  -ms-box-shadow: inset 0 0 5px #666;
+  box-shadow: inset 0 0 5px #666;
+  font-weight: bold;
 }
 
-#flipbook .odd{
-  background:-webkit-gradient(linear, right top, left top, color-stop(0.95, #FFF), color-stop(1, #DADADA));
-  background-image:-webkit-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-  background-image:-moz-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-  background-image:-ms-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-  background-image:-o-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-  background-image:linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-  -webkit-box-shadow:inset 0 0 5px #666;
-  -moz-box-shadow:inset 0 0 5px #666;
-  -o-box-shadow:inset 0 0 5px #666;
-  -ms-box-shadow:inset 0 0 5px #666;
-  box-shadow:inset 0 0 5px #666;
-  
+#flipbook .odd {
+  background: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    color-stop(0.95, #fff),
+    color-stop(1, #dadada)
+  );
+  background-image: -webkit-linear-gradient(right, #fff 95%, #c4c4c4 100%);
+  background-image: -moz-linear-gradient(right, #fff 95%, #c4c4c4 100%);
+  background-image: -ms-linear-gradient(right, #fff 95%, #c4c4c4 100%);
+  background-image: -o-linear-gradient(right, #fff 95%, #c4c4c4 100%);
+  background-image: linear-gradient(right, #fff 95%, #c4c4c4 100%);
+  -webkit-box-shadow: inset 0 0 5px #666;
+  -moz-box-shadow: inset 0 0 5px #666;
+  -o-box-shadow: inset 0 0 5px #666;
+  -ms-box-shadow: inset 0 0 5px #666;
+  box-shadow: inset 0 0 5px #666;
 }
 
-#flipbook .even{
-  background:-webkit-gradient(linear, left top, right top, color-stop(0.95, #fff), color-stop(1, #dadada));
-  background-image:-webkit-linear-gradient(left, #fff 95%, #dadada 100%);
-  background-image:-moz-linear-gradient(left, #fff 95%, #dadada 100%);
-  background-image:-ms-linear-gradient(left, #fff 95%, #dadada 100%);
-  background-image:-o-linear-gradient(left, #fff 95%, #dadada 100%);
-  background-image:linear-gradient(left, #fff 95%, #dadada 100%);
-  -webkit-box-shadow:inset 0 0 5px #666;
-  -moz-box-shadow:inset 0 0 5px #666;
-  -o-box-shadow:inset 0 0 5px #666;
-  -ms-box-shadow:inset 0 0 5px #666;
-  box-shadow:inset 0 0 5px #666;
+#flipbook .even {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0.95, #fff),
+    color-stop(1, #dadada)
+  );
+  background-image: -webkit-linear-gradient(left, #fff 95%, #dadada 100%);
+  background-image: -moz-linear-gradient(left, #fff 95%, #dadada 100%);
+  background-image: -ms-linear-gradient(left, #fff 95%, #dadada 100%);
+  background-image: -o-linear-gradient(left, #fff 95%, #dadada 100%);
+  background-image: linear-gradient(left, #fff 95%, #dadada 100%);
+  -webkit-box-shadow: inset 0 0 5px #666;
+  -moz-box-shadow: inset 0 0 5px #666;
+  -o-box-shadow: inset 0 0 5px #666;
+  -ms-box-shadow: inset 0 0 5px #666;
+  box-shadow: inset 0 0 5px #666;
 }

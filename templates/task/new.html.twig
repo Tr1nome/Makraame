@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Task{% endblock %}
+
+{% block body %}
+    
+<div class="container">
+<h1>Créer une liste</h1>
+    <div class="row">
+    {{ include('task/_form.html.twig') }}
+    </div>
+    <a class ="btn btn-warning" href="{{ path('task_index') }}">Retour</a>
+</div>
+    
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('js/jquery.js')}}"></script>
+<script src="{{ asset('js/list-item.js')}}"></script>
+{% endblock %}

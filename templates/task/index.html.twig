@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task index
+{% endblock %}
+
+{% block body %}
+
+	<div
+		class="container">
+		<!-- Example row of columns -->
+		<div class="row">
+			{% for task in tasks %}
+				<div class="col-md-4">
+					<h2>{{ task.name }}</h2><a class="btn btn-primary" href = {{ path('task_edit', {'id': task.id}) }}><i class="fas fa-edit"></i>Editer la liste</a>
+					{% for item in  task.item %}
+						{% if item.filled %}
+						<a class="a" href ="{{ path('item_edit_ajax', {'id': item.id}) }}">
+							<li style="list-style: url('https://static.xx.fbcdn.net/images/emoji.php/v9/tce/1/28/1f533.png');font-size:1.2rem;">{{ item.label }}</li>
+						</a>
+						{% else %}
+						<a class="a" href ="{{ path('item_edit_ajax', {'id': item.id}) }}">
+							<li style="list-style: url('https://static.xx.fbcdn.net/images/emoji.php/v9/tea/1/28/2b1c.png');font-size:1.2rem;">{{ item.label }}</li>
+						</a>
+						{% endif %}
+					{% endfor %}
+				</div>
+        
+	{% else %}
+		<tr>
+			<td colspan="3">no records found</td>
+		</tr>
+	{% endfor %}
+    </div>
+	<div class="d-flex justify-content-center">
+		<a class="float-center btn btn-success" href="{{ path('task_new') }}">Créer une liste</a>
+	</div>
+{% endblock %}

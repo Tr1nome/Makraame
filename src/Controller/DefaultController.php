@@ -1,11 +1,12 @@
 <?php
 namespace App\Controller;
 
+use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 /**
- * @Route("/", name="accueil", host="leo-souly-modula.fr")
+ * @Route("/", name="accueil")
  */
 class DefaultController extends AbstractController
 {
@@ -16,5 +17,16 @@ class DefaultController extends AbstractController
     {
         return $this->render('default/index.html.twig');
 
+    }
+    /**
+     * @Route("/postitcollection", name="postit_collection", methods="GET")
+     */
+    public function getAllStickers(ImageRepository $imageRepo)
+    {
+        $stickers = $imageRepo->findBy(array('categories'=> 9));
+        return $this->render('postit/index.html.twig', [
+            'stickers' => $stickers
+            
+        ]);
     }
 }

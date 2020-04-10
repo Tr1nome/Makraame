@@ -27,6 +27,7 @@ class ArticleController extends AbstractController
     {
         return $this->render('article/index.html.twig', [
             'articles' => $articleRepository->findAll(),
+            'images'=> $imageRepo->findAll()
             
         ]);
     }
@@ -97,6 +98,7 @@ class ArticleController extends AbstractController
         $posX = $request->get('positionx');
         $posY = $request->get('positiony');
         $creation = $request->get('creation');
+        $author = $request->get('author');
         $article = new Article();
         $article->setTitle($title);
         $article->setContent($content);
@@ -104,6 +106,7 @@ class ArticleController extends AbstractController
         $article->setPositionx($posX);
         $article->setPositiony($posY);
         $article->setCreation($creation);
+        $article->setCreator($author);
         
         $entityManager->persist($article);
         $entityManager->flush();

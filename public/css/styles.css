@@ -48,6 +48,14 @@ div.gallery {
   color:black;
 }
 
+.listinactive{
+  list-style: url('https://static.xx.fbcdn.net/images/emoji.php/v9/tea/1/28/2b1c.png');
+}
+
+.listactive{
+  list-style: url('https://static.xx.fbcdn.net/images/emoji.php/v9/tce/1/28/1f533.png');
+}
+
 .a:hover{
   text-decoration: none;
   color:black;

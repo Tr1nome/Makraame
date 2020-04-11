@@ -7,6 +7,7 @@ use App\Form\ItemType;
 use App\Repository\ItemRepository;
 use App\Repository\TaskRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,7 +42,7 @@ class ItemController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($item);
         $entityManager->flush();
-        return $this->redirectToRoute('task_index');
+        return new JsonResponse($item->getFilled());
     }
 
     /**

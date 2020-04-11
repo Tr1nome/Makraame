@@ -14,12 +14,12 @@
 					<h2>{{ task.name }}</h2><a class="btn btn-primary" href = {{ path('task_edit', {'id': task.id}) }}><i class="fas fa-edit"></i>Editer la liste</a>
 					{% for item in  task.item %}
 						{% if item.filled %}
-						<a class="a" href ="{{ path('item_edit_ajax', {'id': item.id}) }}">
-							<li style="list-style: url('https://static.xx.fbcdn.net/images/emoji.php/v9/tce/1/28/1f533.png');font-size:1.2rem;">{{ item.label }}</li>
+						<a class="a" id="{{ item.id }}">
+							<li class ="listactive"style="font-size:1.2rem;">{{ item.label }}</li>
 						</a>
 						{% else %}
-						<a class="a" href ="{{ path('item_edit_ajax', {'id': item.id}) }}">
-							<li style="list-style: url('https://static.xx.fbcdn.net/images/emoji.php/v9/tea/1/28/2b1c.png');font-size:1.2rem;">{{ item.label }}</li>
+						<a class="a" id="{{ item.id }}">
+							<li class="listinactive"style="font-size:1.2rem;">{{ item.label }}</li>
 						</a>
 						{% endif %}
 					{% endfor %}
@@ -35,3 +35,52 @@
 		<a class="float-center btn btn-success" href="{{ path('task_new') }}">Créer une liste</a>
 	</div>
 {% endblock %}
+{% block javascripts %}
+			<script src="{{ asset("js/jquery.js") }}"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+			<script src="{{ asset("js/jquery-ui-1.8.20.custom.min.js") }}"></script>
+			<script src="{{ asset("js/jquery-ui.js") }}"></script>
+			<script src="{{ asset("js/draggable.js") }}"></script>
+			<script src="{{ asset("js/quote.js") }}"></script>
+			<script src="{{ asset("js/turn.js") }}"></script>
+			<script src="{{ asset("js/zoom.js") }}"></script>
+			<script src="{{ asset("js/hash.js") }}"></script>
+			<script src="{{ asset("js/jgestures.min.js") }}"></script>
+			<script src="{{ asset("js/scissor.min.js") }}"></script>
+			<script src="{{ asset("js/modernizr.2.5.3.min.js") }}"></script>
+			<script src="{{ asset("js/dynamic-article.js") }}"></script>
+			<script src="{{ asset("js/ui/datepicker-fr.js") }}"></script>
+			<script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2@2.0.0/dist/spectrum.min.js"></script>
+			<script>
+				$(document).ready(function () {
+
+
+$(".a").click(function (e) {
+e.preventDefault();
+var id = $(this).prop('id');
+var list = this.querySelector('li');
+$.ajax({
+url: '/item/'+ id + '/edit',
+method: "POST",
+success: function (data) {
+console.log(data);
+const state = data;
+if(list.classList.contains('listactive'))
+{
+	list.classList.replace('listactive','listinactive');
+}
+else{
+	list.classList.replace('listinactive','listactive');
+}
+
+
+}
+})
+});
+
+});
+
+			</script>
+
+		{% endblock %}

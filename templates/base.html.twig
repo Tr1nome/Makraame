@@ -26,27 +26,61 @@
 		{% endblock %}
 	</head>
 	<body>
-		<div class="w3-sidebar w3-bar-block w3-black w3-xxlarge" style="width:70px;">
-			<a href="{{ path('article_index')}}" title="Menu" class="w3-bar-item w3-button">
-				<i class="fa fa-home"></i>
-			</a>
-			<a href="{{ path('quote_index')}}" title="Créer un souvenir" class="w3-bar-item w3-button">
-				<i class="fa fa-search"></i>
-			</a>
-			<a href="{{ path('message_index')}}" title="Chat" class="w3-bar-item w3-button">
-				<i class="fas fa-comment-dots"></i>
-			</a>
-			<a href="{{ path('image_index')}}" title="Menu" class="w3-bar-item w3-button">
-				<i class="fas fa-camera"></i>
-			</a>
-			<a href="{{ path('accueilpostit_collection')}}" title="Collection de stickers" class="w3-bar-item w3-button">
-				<i class="fas fa-sticky-note"></i>
-			</a>
-			<a href="{{ path('task_index')}}" title="Créer des listes" class="w3-bar-item w3-button">
-				<i class="fa fa-list"></i>
-			</a>
-		</div>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="{{ path('accueilindex_1')}}">Home</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+				<ul class="navbar-nav mr-auto">
+					{% if app.user %}
+						<li class="nav-item">
+							<a class="nav-link" href="">Profil</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Pages
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="{{ path('article_index')}}">
+									<i class="fas fa-sticky-note"></i>
+									Tableau de post it</a>
+								<a class="dropdown-item" href="{{ path('task_index')}}">
+									<i class="fa fa-list"></i>
+									Listes</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Something else here</a>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link disabled" href="#" title="Coming soon" tabindex="-1" aria-disabled="true">Boutique</a>
+						</li>
+					</ul>
+				{% endif %}
+				<form class="form-inline my-2 my-lg-0">
+					{% if app.user %}
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle dropleft" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								{{ app.user.username }}
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="{{ path('logout')}}">
+									<i class="fas fa-sticky-note"></i>
+									Déconnexion</a>
+							</div>
+						</li>
+						</ul>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('login') }}">Connexion</a>
+						</li>
+					{% endif %}
+				</form>
+			</div>
+		</nav>
 		{% block body %}
 			<div style="margin-top:50px;"></div>
 		{% endblock %}
@@ -95,7 +129,6 @@ window.location.reload();
 });
 
 });
-
 			</script>
 
 		{% endblock %}
